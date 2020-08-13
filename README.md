@@ -13,7 +13,7 @@ You can share the news with your friends.
 **[OkHTTP3:] (https://github.com/square/okhttp)**  
 
 ----
-**Made using News Api (newsapi.org/)(url)**
+**Made using News Api (newsapi.org)**
 
 ----
 **Made by Samridhi**
