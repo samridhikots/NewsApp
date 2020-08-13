@@ -1,3 +1,5 @@
+
+----
 **Features:**\
 Fetches news from different sources.\
 Amazing UI with animations.\
@@ -18,4 +20,5 @@ You can share the news with your friends.
 ----
 **Made by Samridhi**
 
+----
 
