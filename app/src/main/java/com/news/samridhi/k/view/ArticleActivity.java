@@ -103,7 +103,7 @@ public class ArticleActivity extends AppCompatActivity {
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this news! Send from My News App\n" + Uri.parse(URL));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this news! Send from My Shorts App\n" + Uri.parse(URL));
                 startActivity(Intent.createChooser(shareIntent, "Share with"));
             }
         });

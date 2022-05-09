@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,9 +54,11 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    private String[] SOURCE_ARRAY = {"google-news-in", "bbc-news", "the-hindu", "the-times-of-india",
-            "buzzfeed", "mashable", "mtv-news", "bbc-sport", "espn-cric-info", "talksport", "medical-news-today",
-            "national-geographic", "crypto-coins-news", "engadget", "the-next-web", "the-verge", "techcrunch", "techradar", "ign", "polygon"};
+    private String[] SOURCE_ARRAY = {"google-news-in", "bbc-news", "the-hindu", "the-times-of-india", "mtv-news","mashable" ,"buzzfeed",
+            "aeon.co", "economist.com","mckinsey.com","bloomberg.com", "washingtonpost.com","wsj.com",
+            "nytimes.com","time.com","newscientist.com","theatlantic.com","theguardian.com",
+            "bbc-sport", "espn-cric-info", "talksport", "medical-news-today", "national-geographic", "crypto-coins-news", "engadget",
+            "the-next-web", "the-verge", "techcrunch", "techradar", "ign", "polygon"};
     private String SOURCE;
 
     private ArrayList<ArticleStructure> articleStructure = new ArrayList<>();
@@ -106,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void createDrawer(Bundle savedInstanceState, final Toolbar toolbar, Typeface montserrat_regular) {
+
+
         PrimaryDrawerItem item0 = new PrimaryDrawerItem().withIdentifier(0).withName("GENERAL")
                 .withTypeface(montserrat_regular).withSelectable(false);
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Google News India")
@@ -116,50 +121,74 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .withIcon(R.drawable.ic_thehindu).withTypeface(montserrat_regular);
         PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("The Times of India")
                 .withIcon(R.drawable.ic_timesofindia).withTypeface(montserrat_regular);
-        SectionDrawerItem item5 = new SectionDrawerItem().withIdentifier(5).withName("ENTERTAINMENT")
-                .withTypeface(montserrat_regular);
-        PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(6).withName("Buzzfeed")
-                .withIcon(R.drawable.ic_buzzfeednews).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item7 = new PrimaryDrawerItem().withIdentifier(7).withName("Mashable")
-                .withIcon(R.drawable.ic_mashablenews).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item8 = new PrimaryDrawerItem().withIdentifier(8).withName("MTV News")
+        PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withName("MTV News")
                 .withIcon(R.drawable.ic_mtvnews).withTypeface(montserrat_regular);
-        SectionDrawerItem item9 = new SectionDrawerItem().withIdentifier(9).withName("SPORTS")
+        PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(6).withName("Mashable")
+                .withIcon(R.drawable.ic_mashablenews).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item7 = new PrimaryDrawerItem().withIdentifier(7).withName("Buzzfeed")
+                .withIcon(R.drawable.ic_buzzfeednews).withTypeface(montserrat_regular);
+
+        SectionDrawerItem item8 = new SectionDrawerItem().withIdentifier(8).withName("LEADING BEST ARTICLES/NEWS")
                 .withTypeface(montserrat_regular);
-        PrimaryDrawerItem item10 = new PrimaryDrawerItem().withIdentifier(10).withName("BBC Sports")
+        PrimaryDrawerItem item9 = new PrimaryDrawerItem().withIdentifier(9).withName("Aeon")
+                .withIcon(R.drawable.aeon).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item11 = new PrimaryDrawerItem().withIdentifier(11).withName("The Economist")
+                .withIcon(R.drawable.economist).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item12 = new PrimaryDrawerItem().withIdentifier(12).withName("McKinsey-Quarterly")
+                .withIcon(R.drawable.mckinsey).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item13 = new PrimaryDrawerItem().withIdentifier(13).withName("Bloomberg")
+                .withIcon(R.drawable.bloomberg).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item14 = new PrimaryDrawerItem().withIdentifier(14).withName("Washington Post")
+                .withIcon(R.drawable.washingtonpost).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item15 = new PrimaryDrawerItem().withIdentifier(15).withName("Wall Street Journal")
+                .withIcon(R.drawable.wsj).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item16 = new PrimaryDrawerItem().withIdentifier(16).withName("The New York Times")
+                .withIcon(R.drawable.nyt).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item17 = new PrimaryDrawerItem().withIdentifier(17).withName("Time-US")
+                .withIcon(R.drawable.time).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item18 = new PrimaryDrawerItem().withIdentifier(18).withName("New Scientist")
+                .withIcon(R.drawable.newscientist).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item19 = new PrimaryDrawerItem().withIdentifier(19).withName("Atlantic")
+                .withIcon(R.drawable.atlantic).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item20 = new PrimaryDrawerItem().withIdentifier(20).withName("The Guardian")
+                .withIcon(R.drawable.guardian).withTypeface(montserrat_regular);
+
+        SectionDrawerItem item21 = new SectionDrawerItem().withIdentifier(21).withName("SPORTS")
+                .withTypeface(montserrat_regular);
+        PrimaryDrawerItem item22 = new PrimaryDrawerItem().withIdentifier(22).withName("BBC Sports")
                 .withIcon(R.drawable.ic_bbcsports).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item11 = new PrimaryDrawerItem().withIdentifier(11).withName("ESPN Cric Info")
+        PrimaryDrawerItem item23 = new PrimaryDrawerItem().withIdentifier(23).withName("ESPN Cric Info")
                 .withIcon(R.drawable.ic_espncricinfo).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item12 = new PrimaryDrawerItem().withIdentifier(12).withName("TalkSport")
+        PrimaryDrawerItem item24 = new PrimaryDrawerItem().withIdentifier(24).withName("TalkSport")
                 .withIcon(R.drawable.ic_talksport).withTypeface(montserrat_regular);
-        SectionDrawerItem item13 = new SectionDrawerItem().withIdentifier(13).withName("SCIENCE")
+        SectionDrawerItem item25 = new SectionDrawerItem().withIdentifier(25).withName("SCIENCE")
                 .withTypeface(montserrat_regular);
-        PrimaryDrawerItem item14 = new PrimaryDrawerItem().withIdentifier(14).withName("Medical News Today")
+        PrimaryDrawerItem item26 = new PrimaryDrawerItem().withIdentifier(26).withName("Medical News Today")
                 .withIcon(R.drawable.ic_medicalnewstoday).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item15 = new PrimaryDrawerItem().withIdentifier(15).withName("National Geographic")
+        PrimaryDrawerItem item27 = new PrimaryDrawerItem().withIdentifier(27).withName("National Geographic")
                 .withIcon(R.drawable.ic_nationalgeographic).withTypeface(montserrat_regular);
-        SectionDrawerItem item16 = new SectionDrawerItem().withIdentifier(16).withName("TECHNOLOGY")
+        SectionDrawerItem item28 = new SectionDrawerItem().withIdentifier(28).withName("TECHNOLOGY")
                 .withTypeface(montserrat_regular);
-        PrimaryDrawerItem item17 = new PrimaryDrawerItem().withIdentifier(17).withName("Crypto Coins News")
+        PrimaryDrawerItem item29 = new PrimaryDrawerItem().withIdentifier(29).withName("Crypto Coins News")
                 .withIcon(R.drawable.ic_ccnnews).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item18 = new PrimaryDrawerItem().withIdentifier(18).withName("Engadget")
+        PrimaryDrawerItem item30 = new PrimaryDrawerItem().withIdentifier(30).withName("Engadget")
                 .withIcon(R.drawable.ic_engadget).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item19 = new PrimaryDrawerItem().withIdentifier(19).withName("The Next Web")
+        PrimaryDrawerItem item31 = new PrimaryDrawerItem().withIdentifier(31).withName("The Next Web")
                 .withIcon(R.drawable.ic_thenextweb).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item20 = new PrimaryDrawerItem().withIdentifier(20).withName("The Verge")
+        PrimaryDrawerItem item32 = new PrimaryDrawerItem().withIdentifier(32).withName("The Verge")
                 .withIcon(R.drawable.ic_theverge).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item21 = new PrimaryDrawerItem().withIdentifier(21).withName("TechCrunch")
+        PrimaryDrawerItem item33 = new PrimaryDrawerItem().withIdentifier(33).withName("TechCrunch")
                 .withIcon(R.drawable.ic_techcrunch).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item22 = new PrimaryDrawerItem().withIdentifier(22).withName("TechRadar")
+        PrimaryDrawerItem item34 = new PrimaryDrawerItem().withIdentifier(34).withName("TechRadar")
                 .withIcon(R.drawable.ic_techradar).withTypeface(montserrat_regular);
-        SectionDrawerItem item23 = new SectionDrawerItem().withIdentifier(23).withName("GAMING")
+        SectionDrawerItem item35 = new SectionDrawerItem().withIdentifier(35).withName("GAMING")
                 .withTypeface(montserrat_regular);
-        PrimaryDrawerItem item24 = new PrimaryDrawerItem().withIdentifier(24).withName("IGN")
+        PrimaryDrawerItem item36 = new PrimaryDrawerItem().withIdentifier(36).withName("IGN")
                 .withIcon(R.drawable.ic_ignnews).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item25 = new PrimaryDrawerItem().withIdentifier(25).withName("Polygon")
+        PrimaryDrawerItem item37 = new PrimaryDrawerItem().withIdentifier(37).withName("Polygon")
                 .withIcon(R.drawable.ic_polygonnews).withTypeface(montserrat_regular);
 
-        String headerAppName = "", headerSecondaryText = "Powered by newsapi.org";
+        String headerAppName = "", headerSecondaryText = "Developed by Samridhi";
         headerAppName = getResources().getString(R.string.app_name);
 
         accountHeader = new AccountHeaderBuilder()
@@ -178,8 +207,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .withToolbar(toolbar)
                 .withSelectedItem(1)
                 .addDrawerItems(item0, item1, item2, item3, item4, item5, item6, item7, item8, item9,
-                        item10, item11, item12, item13, item14, item15, item16, item17, item18, item19,
-                        item20, item21, item22, item23, item24, item25)
+                        item11, item12, item13, item14, item15, item16, item17, item18, item19,
+                        item20, item21, item22, item23, item24, item25, item26, item27, item28, item29,
+                        item30, item31, item32, item33, item34, item35, item36, item37)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -205,22 +235,22 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 6:
+                            case 5:
                                 SOURCE = SOURCE_ARRAY[4];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 7:
+                            case 6:
                                 SOURCE = SOURCE_ARRAY[5];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 8:
+                            case 7:
                                 SOURCE = SOURCE_ARRAY[6];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 10:
+                            case 9:
                                 SOURCE = SOURCE_ARRAY[7];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
@@ -235,56 +265,121 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 14:
+                            case 13:
                                 SOURCE = SOURCE_ARRAY[10];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 15:
+                            case 14:
                                 SOURCE = SOURCE_ARRAY[11];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 17:
+                            case 15:
                                 SOURCE = SOURCE_ARRAY[12];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 18:
+                            case 16:
                                 SOURCE = SOURCE_ARRAY[13];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 19:
+                            case 17:
                                 SOURCE = SOURCE_ARRAY[14];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 20:
+                            case 18:
                                 SOURCE = SOURCE_ARRAY[15];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 21:
+                            case 19:
                                 SOURCE = SOURCE_ARRAY[16];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 22:
+                            case 20:
                                 SOURCE = SOURCE_ARRAY[17];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 24:
+                            case 22:
                                 SOURCE = SOURCE_ARRAY[18];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 25:
+                            case 23:
                                 SOURCE = SOURCE_ARRAY[19];
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
+                            case 24:
+                                SOURCE = SOURCE_ARRAY[21];
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 26:
+                                SOURCE = SOURCE_ARRAY[22];
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 27:
+                                SOURCE = SOURCE_ARRAY[23];
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 29:
+                                SOURCE = SOURCE_ARRAY[24];
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 30:
+                                SOURCE = SOURCE_ARRAY[25];
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 31:
+                                SOURCE = SOURCE_ARRAY[26];
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 32:
+                                SOURCE = SOURCE_ARRAY[27];
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 33:
+                                SOURCE = SOURCE_ARRAY[28];
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 34:
+                                SOURCE = SOURCE_ARRAY[29];
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 36:
+                                SOURCE = SOURCE_ARRAY[30];
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 37:
+                                SOURCE = SOURCE_ARRAY[31];
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+//                            case 37:
+//                                SOURCE = SOURCE_ARRAY[32];
+//                                onLoadingSwipeRefreshLayout();
+//                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+//                                break;
+//                            case 38:
+//                                SOURCE = SOURCE_ARRAY[33];
+//                                onLoadingSwipeRefreshLayout();
+//                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+//                                break;
                             default:
                                 break;
                         }
@@ -312,33 +407,67 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         ApiInterface request = ApiClient.getClient(httpClient).create(ApiInterface.class);
 
-        Call<NewsResponse> call = request.getHeadlines(SOURCE, Constants.API_KEY);
-        call.enqueue(new Callback<NewsResponse>() {
+        if(SOURCE.contains(".co")){
+            Log.e("Source","source hit "+ SOURCE);
+            Call<NewsResponse> call = request.getArticles(SOURCE, Constants.API_KEY);
+            call.enqueue(new Callback<NewsResponse>() {
 
-            @Override
-            public void onResponse(@NonNull Call<NewsResponse> call, @NonNull Response<NewsResponse> response) {
+                @Override
+                public void onResponse(@NonNull Call<NewsResponse> call, @NonNull Response<NewsResponse> response) {
 
-                if (response.isSuccessful() && response.body().getArticles() != null) {
+                    if (response.isSuccessful() && response.body().getArticles() != null) {
 
-                    if (!articleStructure.isEmpty()) {
-                        articleStructure.clear();
+                        if (!articleStructure.isEmpty()) {
+                            articleStructure.clear();
+                        }
+
+                        articleStructure = response.body().getArticles();
+
+                        adapter = new DataAdapter(MainActivity.this, articleStructure);
+                        recyclerView.setAdapter(adapter);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
+                }
 
-                    articleStructure = response.body().getArticles();
 
-                    adapter = new DataAdapter(MainActivity.this, articleStructure);
-                    recyclerView.setAdapter(adapter);
+                @Override
+                public void onFailure(@NonNull Call<NewsResponse> call, @NonNull Throwable t) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
-            }
+            });
+        }
+
+        else{
+            Call<NewsResponse> call = request.getHeadlines(SOURCE, Constants.API_KEY);
+            call.enqueue(new Callback<NewsResponse>() {
+
+                @Override
+                public void onResponse(@NonNull Call<NewsResponse> call, @NonNull Response<NewsResponse> response) {
+
+                    if (response.isSuccessful() && response.body().getArticles() != null) {
+
+                        if (!articleStructure.isEmpty()) {
+                            articleStructure.clear();
+                        }
+
+                        articleStructure = response.body().getArticles();
+
+                        adapter = new DataAdapter(MainActivity.this, articleStructure);
+                        recyclerView.setAdapter(adapter);
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }
 
 
-            @Override
-            public void onFailure(@NonNull Call<NewsResponse> call, @NonNull Throwable t) {
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+                @Override
+                public void onFailure(@NonNull Call<NewsResponse> call, @NonNull Throwable t) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            });
+        }
     }
+
+
 
     @Override
     public void onRefresh() {

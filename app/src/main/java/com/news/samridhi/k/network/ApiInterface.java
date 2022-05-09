@@ -13,15 +13,15 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
     //Old Endpoint.
-    @GET("articles")
-    Call<ArticleResponse> getCall(@Query("source") String source,
-                                  @Query("sortBy") String sortBy,
+    @GET("everything")
+    Call<NewsResponse> getArticles(@Query("domains") String domain,
                                   @Query("apiKey") String apiKey);
 
     //New Endpoint to fetch headlines.
     @GET("top-headlines")
     Call<NewsResponse> getHeadlines(@Query("sources") String sources,
                                     @Query("apiKey") String apiKey);
+
 
     //New Endpoint to fetch search results.
     @GET("everything")

@@ -11,7 +11,7 @@ public class Constants {
     public static final String BASE_URL = "https://newsapi.org/v2/";
 
     //API Key
-    public static final String API_KEY = BuildConfig.NEWS_API_KEY;
+    public static final String API_KEY = "90025a773d884bf5971f6524947941d4";
 
     //Used to save the instance of the recyclerView
     public static final String RECYCLER_STATE_KEY = "recycler_list_state";

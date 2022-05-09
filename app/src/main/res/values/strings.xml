@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My News</string>
+    <string name="app_name">My Shorts</string>
     <string name="title_activity_article">My News</string>
     <string name="article_activity_author">AUTHOR:</string>
     <string name="article_activity_source">SOURCE: Times of India</string>
